@@ -402,7 +402,9 @@ export default class LinkingLandingPage extends PureComponent<Props, State> {
         let header = (
             <div className='get-app__header'>
                 <img
-                    src={MattermostLogoSvg}
+                    src='https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/plqrjkl4yd1rj3sgipzr'
+                    height='150px'
+                    width='150px'
                     className='get-app__logo'
                 />
             </div>
@@ -421,7 +423,7 @@ export default class LinkingLandingPage extends PureComponent<Props, State> {
 
             header = (
                 <div className='get-app__header'>
-                    {customLogo}
+                    {'ERP'}
                     <div className='get-app__custom-site-name'>
                         <span>{this.props.siteName}</span>
                     </div>
