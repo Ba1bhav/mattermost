@@ -97,9 +97,9 @@ func (ws *Server) RegisterRoutes(r *mux.Router) {
 
 func (ws *Server) handleWebSocket(w http.ResponseWriter, r *http.Request) {
 	// Upgrade initial GET request to a websocket
-	r.Header.Set("Connection": "keep-alive,Upgrade")
-	r.Header.Set("Upgrade","websocket")
-	
+	r.Header.Set("Connection", "keep-alive,Upgrade")
+	r.Header.Set("Upgrade", "websocket")
+
 	client, err := ws.upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		ws.logger.Error("ERROR upgrading to websocket", mlog.Err(err))
