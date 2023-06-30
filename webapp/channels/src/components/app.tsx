@@ -32,7 +32,7 @@ class App extends React.PureComponent {
                 console.log('redirectSearchUrl:', redirectSearchUrl);
                 const queryParam = redirectSearchUrl?.split('=').at(-1);
                 console.log(queryParam, redirectSearchUrl, 'param<><>');
-                const url = `http://192.180.0.123:3014/login?token=${queryParam}`;
+                const url = `https://goserver.staging.chicmic.co.in/login?token=${queryParam}`;
                 // queryParam
             if(queryParam)
             {
