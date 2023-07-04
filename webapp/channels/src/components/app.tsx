@@ -21,28 +21,25 @@ const WebSocket:any = new WebSocketClient();
 class App extends React.PureComponent {
     connectFailCount=0;
     componentDidMount(){
-        console.log("mount<>><<><<>");
+        console.log=(...args)=>null;
         if(window.location.search?.includes('token'))
-        {
+        {       let baseUrl='https://goserver.staging.chicmic.co.in'
                 let redirectSearchUrl = window.location.search;
-                console.log(window.location.search,' componentDidMount');
                 redirectSearchUrl = redirectSearchUrl.replaceAll('%2F', '/');
                 redirectSearchUrl = redirectSearchUrl.replaceAll('%3F', '?');
                 redirectSearchUrl = redirectSearchUrl.replaceAll('%3D', '=')
-                console.log('redirectSearchUrl:', redirectSearchUrl);
                 const queryParam = redirectSearchUrl?.split('=').at(-1);
-                console.log(queryParam, redirectSearchUrl, 'param<><>');
-                const url = `https://goserver.staging.chicmic.co.in/login?token=${queryParam}`;
+                if (redirectSearchUrl.includes('local')){
+                    baseUrl ='https://goserver.local.chicmic.co.in';
+                }
+                const url = `${baseUrl}/login?token=${queryParam}`;
                 // queryParam
             if(queryParam)
             {
                     axios.get(url,{withCredentials: true})
                         .then((response) => {
-                            console.log('api <><>< call success ',response)
                             WebSocket.onerror = (evt:any) => {
                                 if (this.connectFailCount <= 1) {
-                                    console.log('websocket error'); //eslint-disable-line no-console
-                                    console.log(evt, ',><><><> event '); //eslint-disable-line no-console
                                     alert('Socket error ws');
                                 }
                     
@@ -55,8 +52,6 @@ class App extends React.PureComponent {
                           //  window.close()
                         })
                         // const obj = parseQueryData(window.location);
-                        // console.log(this.props.hcaistory, ' parseQ');
-        
                     // similar behavior as an HTTP redirect
                     // window.location.replace("localhost:8065/chicmic1/channels/town-square");
                     // this.props.history.push('/chicmic1/channels/town-square');

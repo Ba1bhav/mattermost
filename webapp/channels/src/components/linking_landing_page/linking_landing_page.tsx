@@ -425,7 +425,7 @@ export default class LinkingLandingPage extends PureComponent<Props, State> {
                 <div className='get-app__header'>
                     {'ERP'}
                     <div className='get-app__custom-site-name'>
-                        <span>{this.props.siteName}</span>
+                        <span>ERP</span>
                     </div>
                 </div>
             );

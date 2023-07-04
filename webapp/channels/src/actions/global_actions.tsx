@@ -275,8 +275,10 @@ export function emitUserLoggedOutEvent(redirectTo = '/', shouldSignalLogout = tr
         clearUserCookie();
 
         getHistory().push(redirectTo);
+        window?.close();
     }).catch(() => {
         getHistory().push(redirectTo);
+        window?.close();
     });
 }
 
