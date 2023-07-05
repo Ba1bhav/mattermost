@@ -948,29 +948,29 @@ var restrictedUsernames = map[string]struct{}{
 }
 
 func IsValidUsername(s string) bool {
-	if len(s) < UserNameMinLength || len(s) > UserNameMaxLength {
-		return false
-	}
+	// if len(s) < UserNameMinLength || len(s) > UserNameMaxLength {
+	// 	return false
+	// }
 
-	if !validUsernameChars.MatchString(s) {
-		return false
-	}
+	// if !validUsernameChars.MatchString(s) {
+	// 	return false
+	// }
 
-	_, found := restrictedUsernames[s]
-	return !found
+	// _, found := restrictedUsernames[s]
+	return true
 }
 
 func IsValidUsernameAllowRemote(s string) bool {
-	if len(s) < UserNameMinLength || len(s) > UserNameMaxLength {
-		return false
-	}
+	// if len(s) < UserNameMinLength || len(s) > UserNameMaxLength {
+	// 	return false
+	// }
 
-	if !validUsernameCharsForRemote.MatchString(s) {
-		return false
-	}
+	// if !validUsernameCharsForRemote.MatchString(s) {
+	// 	return false
+	// }
 
-	_, found := restrictedUsernames[s]
-	return !found
+	// _, found := restrictedUsernames[s]
+	return true
 }
 
 func CleanUsername(username string) string {
