@@ -28,7 +28,11 @@ const Header = ({alternateLink, backButtonURL, onBackButtonClick}: HeaderProps) 
                     className='header-logo-link'
                     to='/'
                 >
-                    {EnableCustomBrand === 'true' || SiteName !== 'Mattermost' ? SiteName : <Logo/>}
+                    {EnableCustomBrand === 'true' || SiteName !== 'Mattermost' ? SiteName : <Logo
+                        width={50}
+                        height={50}
+                    // eslint-disable-next-line react/jsx-closing-bracket-location
+                    />}
                 </Link>
                 {alternateLink}
             </div>

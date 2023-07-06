@@ -8,6 +8,7 @@ import {isDesktopApp} from 'utils/user_agent';
 
 import HistoryButtons from './history_buttons';
 import ProductMenu from './product_menu';
+import MattermostLogo from 'components/widgets/icons/mattermost_logo';
 
 const LeftControlsContainer = styled.div`
     display: flex;
@@ -23,6 +24,7 @@ const LeftControlsContainer = styled.div`
 
 const LeftControls = (): JSX.Element => (
     <LeftControlsContainer>
+        <MattermostLogo/>
         <ProductMenu/>
         {isDesktopApp() && <HistoryButtons/>}
     </LeftControlsContainer>
