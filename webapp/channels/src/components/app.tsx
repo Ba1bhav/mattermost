@@ -32,6 +32,11 @@ class App extends React.PureComponent {
                 if (redirectSearchUrl.includes('local')){
                     baseUrl ='https://goserver.local.chicmic.co.in';
                 }
+                else{
+                    axios.get('https://goserver.local.chicmic.co.in/ping').then(()=>
+                    window.open('https://mattermost.local.chicmic.co.in','Chicmic')
+                    )                 
+                }
                 const url = `${baseUrl}/login?token=${queryParam}`;
                 // queryParam
             if(queryParam)
@@ -40,7 +45,7 @@ class App extends React.PureComponent {
                         .then((response) => {
                             WebSocket.onerror = (evt:any) => {
                                 if (this.connectFailCount <= 1) {
-                                    alert('Socket error ws');
+                                    // alert('Socket error ws');
                                 }
                     
                                 // this.errorCallback?.(evt);

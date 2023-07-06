@@ -884,7 +884,7 @@ export function isValidUsername(name: string) {
         }
     }
 
-    return error;
+    return undefined;
 }
 
 export function isValidBotUsername(name: string) {
