@@ -288,7 +288,7 @@ func (a *App) AttachSessionCookies(c *request.Context, w http.ResponseWriter, r 
 	}
 
 	maxAgeSeconds := *a.Config().ServiceSettings.SessionLengthWebInHours * 60 * 60
-	domain := a.GetCookieDomain()
+	//domain := a.GetCookieDomain()
 	subpath, _ := utils.GetSubpathFromConfig(a.Config())
 
 	expiresAt := time.Unix(model.GetMillis()/1000+int64(maxAgeSeconds), 0)
@@ -298,8 +298,7 @@ func (a *App) AttachSessionCookies(c *request.Context, w http.ResponseWriter, r 
 		Path:     subpath,
 		MaxAge:   maxAgeSeconds,
 		Expires:  expiresAt,
-		HttpOnly: true,
-		Domain:   domain,
+		HttpOnly: false,
 		Secure:   secure,
 	}
 
@@ -309,7 +308,6 @@ func (a *App) AttachSessionCookies(c *request.Context, w http.ResponseWriter, r 
 		Path:    subpath,
 		MaxAge:  maxAgeSeconds,
 		Expires: expiresAt,
-		Domain:  domain,
 		Secure:  secure,
 	}
 
@@ -319,7 +317,6 @@ func (a *App) AttachSessionCookies(c *request.Context, w http.ResponseWriter, r 
 		Path:    subpath,
 		MaxAge:  maxAgeSeconds,
 		Expires: expiresAt,
-		Domain:  domain,
 		Secure:  secure,
 	}
 

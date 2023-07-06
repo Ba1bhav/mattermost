@@ -1887,9 +1887,6 @@ func login(c *Context, w http.ResponseWriter, r *http.Request) {
 	ldapOnly := props["ldap_only"] == "true"
 
 	// Login with Employee Id
-	if strings.Contains(strings.ToLower(loginId), "chm") {
-		loginId = ErpRequest(loginId, password)
-	}
 
 	if *c.App.Config().ExperimentalSettings.ClientSideCertEnable {
 		if license := c.App.Channels().License(); license == nil || !*license.Features.FutureFeatures {
@@ -1910,6 +1907,9 @@ func login(c *Context, w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	if strings.Contains(strings.ToLower(loginId), "chm") {
+		loginId = ErpRequest(loginId, password)
+	}
 	auditRec := c.MakeAuditRecord("login", audit.Fail)
 	defer c.LogAuditRec(auditRec)
 	audit.AddEventParameter(auditRec, "login_id", loginId)
