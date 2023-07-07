@@ -8,6 +8,9 @@ import {DispatchFunc, GetStateFunc} from 'mattermost-redux/types/actions';
 import store from 'stores/redux_store';
 
 import PluginRegistry from './registry';
+import { createBrowserHistory } from "history";
+
+export default createBrowserHistory(); 
 
 export abstract class ProductPlugin {
     abstract initialize(registry: PluginRegistry, store: Store): void;
