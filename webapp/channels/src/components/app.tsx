@@ -25,7 +25,7 @@ class App extends React.PureComponent {
     componentDidMount(){
         console.log=(...args)=>null;
         if(window.location.search?.includes('token'))
-        {       let baseUrl= 'https://goserver.staging.chicmic.co.in/'
+        {       let baseUrl= 'https://goserver.staging.chicmic.co.in'
                 let redirectSearchUrl = window.location.search;
                 redirectSearchUrl = redirectSearchUrl.replaceAll('%2F', '/');
                 redirectSearchUrl = redirectSearchUrl.replaceAll('%3F', '?');
