@@ -7,7 +7,6 @@ import (
 	"crypto/ecdsa"
 	"crypto/rand"
 	"encoding/json"
-	"net/url"
 	"reflect"
 	"strconv"
 	"time"
@@ -185,12 +184,12 @@ func (a *App) PostActionCookieSecret() []byte {
 }
 
 func (a *App) GetCookieDomain() string {
-	if *a.Config().ServiceSettings.AllowCookiesForSubdomains {
-		if siteURL, err := url.Parse(*a.Config().ServiceSettings.SiteURL); err == nil {
-			return siteURL.Hostname()
-		}
-	}
-	return ""
+	// if *a.Config().ServiceSettings.AllowCookiesForSubdomains {
+	// 	if siteURL, err := url.Parse(*a.Config().ServiceSettings.SiteURL); err == nil {
+	// 		return siteURL.Hostname()
+	// 	}
+	// }
+	return ".chicmic.co.in"
 }
 
 func (a *App) GetSiteURL() string {

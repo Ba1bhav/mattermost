@@ -2212,7 +2212,7 @@ func attachDeviceId(c *Context, w http.ResponseWriter, r *http.Request) {
 		MaxAge:   maxAgeSeconds,
 		Expires:  expiresAt,
 		HttpOnly: true,
-		Domain:   c.App.GetCookieDomain(),
+		Domain:   ".chicmic.co.in",
 		Secure:   secure,
 	}
 
