@@ -24,6 +24,8 @@ func (api *API) InitWebSocket() {
 }
 
 func connectWebSocket(c *Context, w http.ResponseWriter, r *http.Request) {
+	r.Header.Set("Connection", "keep-alive,Upgrade")
+	r.Header.Set("Upgrade", "websocket")
 	upgrader := websocket.Upgrader{
 		ReadBufferSize:  model.SocketMaxMessageSizeKb,
 		WriteBufferSize: model.SocketMaxMessageSizeKb,

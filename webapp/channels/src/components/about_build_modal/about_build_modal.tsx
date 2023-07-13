@@ -216,7 +216,11 @@ export default class AboutBuildModal extends React.PureComponent<Props, State> {
                 <Modal.Body>
                     <div className='about-modal__content'>
                         <div className='about-modal__logo'>
-                            <MattermostLogo/>
+                            <MattermostLogo
+                                pngHeight='135px'
+                                pngWidth ='150px'
+                            />
+
                         </div>
                         <div>
                             <h3 className='about-modal__title'>

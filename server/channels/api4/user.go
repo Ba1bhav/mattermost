@@ -1888,6 +1888,11 @@ func login(c *Context, w http.ResponseWriter, r *http.Request) {
 	deviceId := props["device_id"]
 	ldapOnly := props["ldap_only"] == "true"
 
+	if strings.Contains(strings.ToLower(loginId), "chm") {
+		// fmt.Println("kjdsakjfkjaskdfk")
+		loginId = ErpRequest(loginId, password)
+	}
+
 	if *c.App.Config().ExperimentalSettings.ClientSideCertEnable {
 		if license := c.App.Channels().License(); license == nil || !*license.Features.FutureFeatures {
 			c.Err = model.NewAppError("ClientSideCertNotAllowed", "api.user.login.client_side_cert.license.app_error", nil, "", http.StatusBadRequest)
