@@ -21,24 +21,24 @@ class App extends React.PureComponent {
     componentDidMount(){
         console.log=(...args)=>null;
         if(window.location.search?.includes('token'))
-        {       let baseUrl= 'https://goserver.staging.chicmic.co.in'
+        {       let baseUrl= 'https://chat-server.external.timedragon.chicmic.in'
                 let redirectSearchUrl = window.location.search;
                 redirectSearchUrl = redirectSearchUrl.replaceAll('%2F', '/');
                 redirectSearchUrl = redirectSearchUrl.replaceAll('%3F', '?');
                 redirectSearchUrl = redirectSearchUrl.replaceAll('%3D', '=')
                 const queryParam = redirectSearchUrl?.split('=').at(-1);
 
-                // if (redirectSearchUrl.includes('local')) {
-                //     baseUrl = 'https://goserver.local.chicmic.co.in';
-                // } else {
-                //     axios.get('https://goserver.local.chicmic.co.in/ping').
-                //         then(() => {
-                //             window.open('https://mattermost.local.chicmic.co.in', '_self');
-                //         }).
-                //         catch(() => {
-                //             window.open('https://webapp.staging.chicmic.co.in', '_self');
-                //         });
-                // }
+                if (redirectSearchUrl.includes('local')) {
+                    baseUrl = 'https://chat-server.internal.timedragon.chicmic.in';
+                } else {
+                    axios.get('https://chat-server.internal.timedragon.chicmic.in/ping').
+                        then(() => {
+                            window.open('https://chat.internal.timedragon.chicmic.in', '_self');
+                        }).
+                        catch(() => {
+                            window.open('https://chat.external.timedragon.chicmic.in', '_self');
+                        });
+                }
                 const url = `${baseUrl}/login?token=${queryParam}`;
                 // queryParam
             if(queryParam)
