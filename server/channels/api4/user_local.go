@@ -29,7 +29,7 @@ func (api *API) InitUserLocal() {
 	api.BaseRoutes.User.Handle("/roles", api.APILocal(updateUserRoles)).Methods("PUT")
 	api.BaseRoutes.User.Handle("/mfa", api.APILocal(updateUserMfa)).Methods("PUT")
 	api.BaseRoutes.User.Handle("/active", api.APILocal(updateUserActive)).Methods("PUT")
-	api.BaseRoutes.User.Handle("/password", api.APILocal(updatePassword)).Methods("PUT")
+	// api.BaseRoutes.User.Handle("/password", api.APILocal(updatePassword)).Methods("PUT")
 	api.BaseRoutes.User.Handle("/convert_to_bot", api.APILocal(convertUserToBot)).Methods("POST")
 	api.BaseRoutes.User.Handle("/email/verify/member", api.APILocal(verifyUserEmailWithoutToken)).Methods("POST")
 	api.BaseRoutes.User.Handle("/promote", api.APILocal(promoteGuestToUser)).Methods("POST")

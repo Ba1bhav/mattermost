@@ -43,7 +43,7 @@ func (api *API) InitUser() {
 	api.BaseRoutes.User.Handle("", api.APISessionRequired(deleteUser)).Methods("DELETE")
 	api.BaseRoutes.User.Handle("/roles", api.APISessionRequired(updateUserRoles)).Methods("PUT")
 	api.BaseRoutes.User.Handle("/active", api.APISessionRequired(updateUserActive)).Methods("PUT")
-	api.BaseRoutes.User.Handle("/password", api.APISessionRequired(updatePassword)).Methods("PUT")
+	// api.BaseRoutes.User.Handle("/password", api.APISessionRequired(updatePassword)).Methods("PUT")
 	api.BaseRoutes.User.Handle("/promote", api.APISessionRequired(promoteGuestToUser)).Methods("POST")
 	api.BaseRoutes.User.Handle("/demote", api.APISessionRequired(demoteUserToGuest)).Methods("POST")
 	api.BaseRoutes.User.Handle("/convert_to_bot", api.APISessionRequired(convertUserToBot)).Methods("POST")
@@ -1888,8 +1888,10 @@ func login(c *Context, w http.ResponseWriter, r *http.Request) {
 	token := props["token"]
 	fmt.Println("token: ", token)
 	if token != "" {
-		loginId = ErpRequestToken(token, password)
+		fmt.Println("inside token verification: ")
+		loginId = ErpRequestToken(token)
 		password = "123456"
+		fmt.Println("login: ", loginId, "password: ", password)
 	} else if strings.Contains(strings.ToLower(loginId), "erpadmin@chicmic.co.in") {
 		// no request to ERP interact with MMDB
 		loginId = "erpadmin@chicmic.co.in"
