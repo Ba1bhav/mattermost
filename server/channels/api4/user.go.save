@@ -1887,30 +1887,27 @@ func login(c *Context, w http.ResponseWriter, r *http.Request) {
 	mfaToken := props["token"]
 	deviceId := props["device_id"]
 	ldapOnly := props["ldap_only"] == "true"
-	token := props["token"]
-	fmt.Println("token: ", token)
-	if token != "" {
-	fmt.Println("inside token verification: ")
-		loginId = ErpRequestToken(token)
-		password = "123456"
-fmt.Println("login: ", loginId, "password: ", password)
-	} else if strings.Contains(strings.ToLower(loginId), "erpadmin@chicmic.co.in") {
-		// no request to ERP interact with MMDB
-		loginId = "erpadmin@chicmic.co.in"
-	} else if strings.Contains(strings.ToLower(loginId), "@chicmic") {
+
+	if strings.Contains(strings.ToLower(loginId), "@chicmic") {
 		//email id check
 		loginId = ErpRequest(loginId, password)
-		password = "123456"
+	} else if strings.Contains(strings.ToLower(loginId), "chm") {
+	if strings.Contains(strings.ToLower(loginId), "@chicmic") && !strings.Contains(strings.ToLower(loginId), "erpadmin") {
+		//email id check
+		loginId = ErpRequest(loginId, password)
 	} else if strings.Contains(strings.ToLower(loginId), "chm") {
 		//employee code check
 		loginId = ErpRequest(loginId, password)
-		password = "123456"
+	} else {
+		c.Err = model.NewAppError("login", "please enter either your email or employee code", nil, "", http.StatusUnauthorized)
+		return
+	}		//employee code check
+		loginId = ErpRequest(loginId, password)
 	} else {
 		c.Err = model.NewAppError("login", "please enter either your email or employee code", nil, "", http.StatusUnauthorized)
 		return
 	}
-	fmt.Println("loginid: ", loginId)
-	fmt.Println("password: ", password)
+
 //	if strings.Contains(strings.ToLower(loginId), "chm") {
 		// fmt.Println("kjdsakjfkjaskdfk")
 //		loginId = ErpRequest(loginId, password)

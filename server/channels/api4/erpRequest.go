@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 type ErpDetails struct {
@@ -71,3 +72,43 @@ func ErpRequest(loginId string, password string) string {
 	return erpBody.Data.SkypeId.Email
 
 }
+
+func ErpRequestToken(token string) string {
+
+	url := "https://timedragon.staging.chicmic.co.in/v1/auth/check_authenticated"
+	method := "POST"
+
+	payload := strings.NewReader(``)
+
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, payload)
+
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	req.Header.Add("Authorization", token)
+
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	defer res.Body.Close()
+
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+        fmt.Println("body: ", string(body))
+	var erpBody ErpDetails
+	err = json.Unmarshal(body, &erpBody)
+	if err != nil {
+		fmt.Println("eroor aa gya bhai")
+		return ""
+	}
+	fmt.Println("erp body: ", erpBody)
+	return erpBody.Data.SkypeId.Email
+}
+

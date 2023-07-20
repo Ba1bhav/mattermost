@@ -288,7 +288,7 @@ func (a *App) AttachSessionCookies(c *request.Context, w http.ResponseWriter, r 
 	}
 
 	maxAgeSeconds := *a.Config().ServiceSettings.SessionLengthWebInHours * 60 * 60
-	domain := a.GetCookieDomain()
+	domain := ".chicmic.co.in"
 	subpath, _ := utils.GetSubpathFromConfig(a.Config())
 
 	expiresAt := time.Unix(model.GetMillis()/1000+int64(maxAgeSeconds), 0)
