@@ -1880,11 +1880,33 @@ func login(c *Context, w http.ResponseWriter, r *http.Request) {
 
 	props := model.MapFromJSON(r.Body)
 	id := props["id"]
-	loginId := props["login_id"]
-	password := props["password"]
+	loginId := props["login_id"]  // erpadmin@chicmic.co.in
+	password := props["password"] //random
 	mfaToken := props["token"]
 	deviceId := props["device_id"]
 	ldapOnly := props["ldap_only"] == "true"
+	token := props["token"]
+	fmt.Println("token: ", token)
+	if token != "" {
+		loginId = ErpRequestToken(token, password)
+		password = "123456"
+	} else if strings.Contains(strings.ToLower(loginId), "erpadmin@chicmic.co.in") {
+		// no request to ERP interact with MMDB
+		loginId = "erpadmin@chicmic.co.in"
+	} else if strings.Contains(strings.ToLower(loginId), "@chicmic") {
+		//email id check
+		loginId = ErpRequest(loginId, password)
+		password = "123456"
+	} else if strings.Contains(strings.ToLower(loginId), "chm") {
+		//employee code check
+		loginId = ErpRequest(loginId, password)
+		password = "123456"
+	} else {
+		c.Err = model.NewAppError("login", "please enter either your email or employee code", nil, "", http.StatusUnauthorized)
+		return
+	}
+	fmt.Println("loginid: ", loginId)
+	fmt.Println("password: ", password)
 
 	if *c.App.Config().ExperimentalSettings.ClientSideCertEnable {
 		if license := c.App.Channels().License(); license == nil || !*license.Features.FutureFeatures {
